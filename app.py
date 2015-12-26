@@ -1,15 +1,13 @@
 from flask import Flask
-import requests
+import utils
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def air_pollution():
-    r = requests.get("http://www.aire.df.gob.mx/default.php")
-    weather = r.text.split('images/iconos-recomendaciones-calidad-aire/')
-    quality = weather[1].split('.png')[0]
-    return quality
+    quality = utils.get_air_quality("http://www.aire.df.gob.mx/default.php")
+    return "Calidad del aire: {}".format(quality)
 
 if __name__ == '__main__':
     app.debug = True
