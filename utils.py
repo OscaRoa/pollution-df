@@ -18,12 +18,13 @@ class WeatherData(object):
         except:
             return "Cannot got air quality"
 
-    def get_time(self):
+    def get_temp(self):
         try:
             r = requests.get(self.url)
-            time = r.text.spli(
-                "id='calidadairehora'>"
-                )[0].split('</div>')
-            return time
+            t = r.text.split(
+                "id='calidadairetemperaturaahora'>"
+                )
+            temp = t[1].split('</div>')[0]
+            return temp
         except:
-            return "Cannot get time."
+            return "Cannot get temp."
