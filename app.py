@@ -1,12 +1,13 @@
 from flask import Flask
-import utils
+from utils import WeatherData
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def air_pollution():
-    quality = utils.get_air_quality("http://www.aire.df.gob.mx/default.php")
+    w = WeatherData(url="http://www.aire.df.gob.mx/default.php")
+    quality = w.get_air_quality()
     return "Calidad del aire: {}".format(quality)
 
 if __name__ == '__main__':
